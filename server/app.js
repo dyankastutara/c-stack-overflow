@@ -10,7 +10,7 @@ const cors = require('cors');
 var StrategyLocal = require('passport-local').Strategy;
 var passportHelpers = require('./helpers/passport');
 
-mongoose.connect('mongodb://localhost/to-do-anythings');
+mongoose.connect('mongodb://localhost/c-stack-overflow');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
@@ -19,7 +19,7 @@ db.once('open', function() {
 });
 
 var users = require('./routes/users');
-
+var questions = require('./routes/questions');
 
 
 var app = express();
@@ -40,6 +40,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/users', users)
+app.use('/questions', questions)
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
